@@ -31,7 +31,7 @@ for ($x = $id_i; $x <= $id_f; $x++)
    $sexo = ucfirst($objeto->gender);
    $idioma = strtolower($objeto->locale);
    $perfil = $objeto->link;
-
+   if(!$id) continue; // Nao exibe $id excluidos.
    echo "<br>";
    echo "<b>ID: </b>".$id."<br>";
    echo "<b>Usuario: </b>".$usuario.'</b></font><br>';

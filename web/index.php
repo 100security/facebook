@@ -93,10 +93,10 @@ for ($i = $_GET['id_i']; $i <= $_GET['id_f']; $i++) // De acordo com os IDs info
 		$id = $objeto->id; // $id = Armazena o ID.
 		$usuario = $objeto->username; // $usuario = Armazena o Usuário do Facebook.
 		$nome = $objeto->name; // $nome - Armazena o Nome Completo do Usuário ( Nome + Sobrenome ) informados no Perfil.
-		$sexo = ucfirst($objeto->gender); // $sexo - Armazena o Sexo ( Male = Masculino or Femele = Feminino ) e ucfirt = Exibe a primeira letra em MAIÚSCULO.
+		$sexo = ucfirst($objeto->gender); // $sexo - Armazena o Sexo ( Male = Masculino or Female = Feminino ) e ucfirt = Exibe a primeira letra em MAIÚSCULO.
 		$idioma = strtolower($objeto->locale); // $idiome = Armaneza o Idioma do Perfil e strtolower = Exibe todo o texto em minúsculo.
 		$perfil = $objeto->link; // $perfil = Armaneza a URL do Perfil (https://www.facebook.com/marcoshenrique.face)
-		
+        if(!$id) continue; // Nao exibe $id excluidos.
 		echo "<br>";
 		echo "<font face=Calibri color=#000000><b>ID: </b>".$id."<br>";
         echo "<font face=Calibri color=#000000><b>Usuário: </b>"."<font face=Calibri color=#FF0000><b>".$usuario.'</b></font><br>';
