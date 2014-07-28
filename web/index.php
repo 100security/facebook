@@ -87,7 +87,10 @@ $meta = get_meta_tags($_GET['id_i']); // Armazena do ID informado no Formulário
 for ($i = $_GET['id_i']; $i <= $_GET['id_f']; $i++) // De acordo com os IDs informados realize o processo de exibição.
 {
         $facebook= file_get_contents("http://graph.facebook.com/$i"); // Exibe o Array através do ID informado.
-        
+        $miniatura = file_get_contents("https://graph.facebook.com/?ids=$i&fields=picture");
+        $miniatura = preg_replace('~[{}\\\\\"]~','',$miniatura).'<br>';
+        $foto = explode(',',$miniatura);
+		
 		$objeto=json_decode($facebook);
         
 		$id = $objeto->id; // $id = Armazena o ID.
@@ -98,6 +101,7 @@ for ($i = $_GET['id_i']; $i <= $_GET['id_f']; $i++) // De acordo com os IDs info
 		$perfil = $objeto->link; // $perfil = Armaneza a URL do Perfil (https://www.facebook.com/marcoshenrique.face)
         if(!$id) continue; // Nao exibe $id excluidos.
 		echo "<br>";
+		echo "<img src=".substr($foto[1],4)."><br>"; //Foto do Perfil (miniatura)
 		echo "<font face=Calibri color=#000000><b>ID: </b>".$id."<br>";
         echo "<font face=Calibri color=#000000><b>Usuário: </b>"."<font face=Calibri color=#FF0000><b>".$usuario.'</b></font><br>';
         echo "<font face=Calibri color=#000000><b>Nome: </b>".$nome.'<br>';

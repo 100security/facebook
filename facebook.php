@@ -8,12 +8,20 @@ www.100security.com.br
 
 // $id ='648521495';
 $id ='marcoshenrique.face';
-    $facebook = file_get_contents("https://graph.facebook.com/$id");
+    $facebook = file_get_contents("https://graph.facebook.com/?ids=$id");
     $facebook = preg_replace('~[{}\\\\\"]~','',$facebook).'<br>';
     $exibir = explode(',',$facebook);
 echo '<pre>';
 print_r ($exibir);
+echo '<hr>';
+echo "Foto";
 
+$id ='marcoshenrique.face';
+    $facebook = file_get_contents("https://graph.facebook.com/?ids=$id&fields=picture");
+    $facebook = preg_replace('~[{}\\\\\"]~','',$facebook).'<br>';
+    $exibir = explode(',',$facebook);
+echo '<pre>';
+print_r ($exibir);
 echo '<hr>';
 
 $id_i = 648521495;
@@ -21,8 +29,11 @@ $id_f = 648521495;
 
 for ($x = $id_i; $x <= $id_f; $x++)
 {
-   $facebook= file_get_contents("http://graph.facebook.com/$x");
-
+   $facebook = file_get_contents("http://graph.facebook.com/$x");
+   $miniatura = file_get_contents("https://graph.facebook.com/?ids=$x&fields=picture");
+   $miniatura = preg_replace('~[{}\\\\\"]~','',$miniatura).'<br>';
+   $foto = explode(',',$miniatura);   
+   
    $objeto=json_decode($facebook);
 
    $id = $objeto->id;
@@ -33,6 +44,7 @@ for ($x = $id_i; $x <= $id_f; $x++)
    $perfil = $objeto->link;
    if(!$id) continue; // Nao exibe $id excluidos.
    echo "<br>";
+   echo "<img src=".substr($foto[1],4)."><br>";
    echo "<b>ID: </b>".$id."<br>";
    echo "<b>Usuario: </b>".$usuario.'</b></font><br>';
    echo "<b>Nome: </b>".$nome.'<br>';
